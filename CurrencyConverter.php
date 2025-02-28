@@ -1,5 +1,8 @@
 <?php
 
+/**
+ * Конвертує число з плаваючою комою в суму в гривнях з копійками та пише її словами
+ */
 class CurrencyConverter {
     private $ones = array(
         0 => 'нуль',
@@ -55,13 +58,14 @@ class CurrencyConverter {
     );
 
     /**
-     * Конвертує число з плаваючою комою в суму в гривнях з копійками та пише їх словами.
+     * Конвертує число з плаваючою комою в суму в гривнях з копійками та пише її словами.
      *
      * @param float $amount Сума для конвертації.
      * @param bool $firstLetterUppercase Починати з великої літери
      * @return string Відформатована сума в гривнях з копійками словами.
      */
-    public function convertToHryvniaWords(float $amount, $firstLetterUppercase = false): string {
+    public function convertToHryvniaWords(float $amount, $firstLetterUppercase = false): string
+    {
         if (!is_numeric($amount)) {
             return "Некоректне значення";
         }
@@ -82,7 +86,8 @@ class CurrencyConverter {
         return $string;
     }
 
-    private function numberToWords(int $number, string $currency): string {
+    private function numberToWords(int $number, string $currency): string
+    {
         if ($number == 0) {
             return 'нуль';
         }
@@ -118,7 +123,8 @@ class CurrencyConverter {
         return $result;
     }
 
-    private function convertGroup(int $group, int $thousandsCounter): string {
+    private function convertGroup(int $group, int $thousandsCounter): string
+    {
         if ($group == 0) {
             return '';
         }
@@ -148,7 +154,8 @@ class CurrencyConverter {
         return trim($result);
     }
 
-    private function getThousandsSuffix(int $group, int $thousandsCounter): string {
+    private function getThousandsSuffix(int $group, int $thousandsCounter): string
+    {
         $suffix = $this->thousands[$thousandsCounter];
 
         if ($thousandsCounter == 1) {
@@ -180,7 +187,8 @@ class CurrencyConverter {
         return $suffix;
     }
 
-    function ucfirst(string $string): string {
+    private function ucfirst(string $string): string
+    {
         if (empty($string)) {
             return '';
         }
