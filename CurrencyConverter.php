@@ -1,6 +1,5 @@
 <?php
 
-
 class CurrencyConverter {
     private $ones = array(
         0 => 'нуль',
@@ -59,9 +58,10 @@ class CurrencyConverter {
      * Конвертує число з плаваючою комою в суму в гривнях з копійками та пише їх словами.
      *
      * @param float $amount Сума для конвертації.
+     * @param bool $firstLetterUppercase Починати з великої літери
      * @return string Відформатована сума в гривнях з копійками словами.
      */
-    public function convertToHryvniaWords(float $amount): string {
+    public function convertToHryvniaWords(float $amount, $firstLetterUppercase = false): string {
         if (!is_numeric($amount)) {
             return "Некоректне значення";
         }
@@ -73,7 +73,13 @@ class CurrencyConverter {
         $hryvniaWords = $this->numberToWords($hryvnia, 'гривня');
         $coinsWords = $this->numberToWords($coins, 'копійка');
 
-        return "{$hryvniaWords} грн. {$coinsWords} коп";
+        $string = "{$hryvniaWords} грн. {$coinsWords} коп";
+
+        if ($firstLetterUppercase) {
+            $string = $this->ucfirst($string);
+        }
+
+        return $string;
     }
 
     private function numberToWords(int $number, string $currency): string {
@@ -172,6 +178,17 @@ class CurrencyConverter {
         }
 
         return $suffix;
+    }
+
+    function ucfirst(string $string): string {
+        if (empty($string)) {
+            return '';
+        }
+
+        $firstChar = mb_substr($string, 0, 1, 'UTF-8');
+        $rest = mb_substr($string, 1, null, 'UTF-8');
+
+        return mb_strtoupper($firstChar, 'UTF-8') . $rest;
     }
 
 }
