@@ -3,7 +3,8 @@
 /**
  * Конвертує число з плаваючою комою в суму в гривнях з копійками та пише її словами
  */
-class CurrencyConverter {
+class NumberToWordsConverter
+{
     private $ones = array(
         0 => 'нуль',
         1 => 'одна',
@@ -64,7 +65,7 @@ class CurrencyConverter {
      * @param bool $firstLetterUppercase Починати з великої літери
      * @return string Відформатована сума в гривнях з копійками словами.
      */
-    public function convertToHryvniaWords(float $amount, $firstLetterUppercase = false): string
+    public function convert(float $amount, $firstLetterUppercase = false): string
     {
         if (!is_numeric($amount)) {
             return "Некоректне значення";
@@ -200,3 +201,4 @@ class CurrencyConverter {
     }
 
 }
+
